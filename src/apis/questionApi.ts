@@ -53,7 +53,7 @@ router.post('/', createQuestionValidator, checkValidation, async (req: express.R
     success: true,
     data
   });
-})
+});
 
 const updateQuestionValidator = [
   body('title').isString(),
@@ -81,7 +81,7 @@ router.put('/:id', updateQuestionValidator, checkValidation, async (req: express
     success: true,
     data
   });
-})
+});
 
 router.post('/like/up/:id', async (req, res) => {
   const {id} = req.params;
@@ -152,6 +152,6 @@ router.delete('/:id', async (req, res) => {
   }
 
   await data.destroy();
-})
+});
 
 export default router;
