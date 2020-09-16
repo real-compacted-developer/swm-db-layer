@@ -152,6 +152,11 @@ router.delete('/:id', async (req, res) => {
   }
 
   await data.destroy();
+
+  res.status(200).json({
+    success: true,
+    data
+  });
 });
 
 export default router;
