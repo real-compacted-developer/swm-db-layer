@@ -1,7 +1,7 @@
 import express from 'express';
 import db from "../database";
 import ERROR_CODE from "../constants/errorCode";
-import { body, param } from 'express-validator';
+import {body} from 'express-validator';
 import checkValidation from "../middlewares/validator";
 
 const router = express.Router();
