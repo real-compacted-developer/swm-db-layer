@@ -1,6 +1,12 @@
 import {ModelCtor, Sequelize} from 'sequelize';
 import config from '../config';
-import initAssociation from "./association";
+
+import userModel from "./models/userModel";
+import studyGroupModel from "./models/studyGroupModel";
+import studyDataModel from "./models/studyDataModel";
+import slideModel from "./models/slideModel";
+import questionModel from "./models/questionModel";
+import studyMemberModel from "./models/studyMemberModel";
 
 interface DatabaseData {
   sequelize: Sequelize;
@@ -16,7 +22,7 @@ const {database, host, password, username} = config.database;
 
 const db: DatabaseData = {} as DatabaseData;
 
-const sequelize = new Sequelize(database, password, username, {
+const sequelize = new Sequelize(database, username, password, {
   logging: false,
   host,
   dialect: "mysql",
@@ -24,13 +30,11 @@ const sequelize = new Sequelize(database, password, username, {
 });
 
 db.sequelize = sequelize;
-db.User = require("./models/userModel")(sequelize, Sequelize);
-db.StudyGroup = require("./models/studyGroupModel")(sequelize, Sequelize);
-db.StudyData = require("./models/studyDataModel")(sequelize, Sequelize);
-db.Slide = require("./models/slideModel")(sequelize, Sequelize);
-db.Question = require("./models/questionModel")(sequelize, Sequelize);
-db.StudyMember = require("./models/studyMemberModel")(sequelize, Sequelize);
-
-initAssociation();
+db.User = userModel(sequelize);
+db.StudyGroup = studyGroupModel(sequelize);
+db.StudyData = studyDataModel(sequelize);
+db.Slide = slideModel(sequelize);
+db.Question = questionModel(sequelize);
+db.StudyMember = studyMemberModel(sequelize);
 
 export default db;
