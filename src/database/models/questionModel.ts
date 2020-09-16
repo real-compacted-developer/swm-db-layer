@@ -1,4 +1,4 @@
-import {DataTypes, Sequelize, ModelCtor} from 'sequelize';
+import {DataTypes, ModelCtor, Sequelize} from 'sequelize';
 
 const questionModel = (sequelize: Sequelize): ModelCtor<any> => {
   return sequelize.define("Question", {
@@ -21,12 +21,10 @@ const questionModel = (sequelize: Sequelize): ModelCtor<any> => {
     },
     createdAt: {
       type: "TIMESTAMP",
-      defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       allowNull: false
     },
     updatedAt: {
       type: "TIMESTAMP",
-      defaultValue: Sequelize.literal("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"),
       allowNull: false
     }
   }, {
