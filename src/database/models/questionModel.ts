@@ -18,17 +18,10 @@ const questionModel = (sequelize: Sequelize): ModelCtor<any> => {
     like: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    },
-    createdAt: {
-      type: "TIMESTAMP",
-      allowNull: false
-    },
-    updatedAt: {
-      type: "TIMESTAMP",
-      allowNull: false
     }
   }, {
     freezeTableName: true,
+    timestamps: true
   });
 };
 

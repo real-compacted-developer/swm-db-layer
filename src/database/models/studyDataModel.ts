@@ -9,19 +9,10 @@ const studyDataModel = (sequelize: Sequelize): ModelCtor<any> => {
     },
     week: {
       type: DataTypes.INTEGER,
-    },
-    createdAt: {
-      type: "TIMESTAMP",
-      defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
-      allowNull: false
-    },
-    updatedAt: {
-      type: "TIMESTAMP",
-      defaultValue: Sequelize.literal("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"),
-      allowNull: false
     }
   }, {
     freezeTableName: true,
+    timestamps: true
   });
 };
 
