@@ -41,6 +41,24 @@ const createQuestionValidator = [
 router.post('/', createQuestionValidator, checkValidation, async (req: express.Request, res: express.Response) => {
   const {title, content, writer, SlideId} = req.body;
 
+  const currentUser = await db.User.findByPk(writer);
+  if (!currentUser) {
+    res.status(400).json({
+      success: false,
+      message: ERROR_CODE.USER_NOT_FOUND
+    });
+    return;
+  }
+
+  const currentSlide = await db.Slide.findByPk(SlideId);
+  if (!currentSlide) {
+    res.status(404).json({
+      success: false,
+      message: ERROR_CODE.SLIDE_NOT_FOUND
+    });
+    return;
+  }
+
   const data = await db.Question.create({
     title,
     content,

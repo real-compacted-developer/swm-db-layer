@@ -40,6 +40,15 @@ const createSlideValidator = [
 router.post('/', createSlideValidator, checkValidation, async (req: express.Request, res: express.Response) => {
   const {order, url, dataId} = req.body;
 
+  const currentStudyData = await db.StudyData.findByPk(dataId);
+  if (!currentStudyData) {
+    res.status(404).json({
+      success: false,
+      message: ERROR_CODE.STUDY_DATA_NOT_FOUND
+    });
+    return;
+  }
+
   const data = await db.Slide.create({
     order,
     url,
@@ -60,6 +69,15 @@ const updateSlideValidator = [
 router.put('/:id', updateSlideValidator, checkValidation, async (req: express.Request, res: express.Response) => {
   const {id} = req.params;
   const {order, url, dataId} = req.body;
+
+  const currentStudyData = await db.StudyData.findByPk(dataId);
+  if (!currentStudyData) {
+    res.status(404).json({
+      success: false,
+      message: ERROR_CODE.STUDY_DATA_NOT_FOUND
+    });
+    return;
+  }
 
   const data = await db.Slide.findByPk(id);
   if (!data) {
