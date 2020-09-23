@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 
 router.get('/nickname/:nickname', async (req, res) => {
   const {nickname} = req.params;
-  const data = await db.StudyMember.findOne({
+  const data = await db.StudyMember.findAll({
     where: {
       nickname
     }
@@ -38,7 +38,7 @@ router.get('/nickname/:nickname', async (req, res) => {
 
 router.get('/study/:title', async (req, res) => {
   const {title} = req.params;
-  const data = await db.StudyMember.findOne({
+  const data = await db.StudyMember.findAll({
     where: {
       studyTitle: title
     }
